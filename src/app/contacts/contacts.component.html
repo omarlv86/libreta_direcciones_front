@@ -1,14 +1,18 @@
-<div class="row">
+<div class="row py-4">
     <div class="col-md-12 py-3">
         <h3 class="text-center">Libreta de Contactos</h3>
     </div>
     <div class="col-md-4 mx-4">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Buscar" aria-label="Username" aria-describedby="basic-addon1">
+            <input 
+              type="text" 
+              class="form-control" 
+              [formControl]="inputControl"
+              placeholder="Buscar" aria-label="Username" aria-describedby="basic-addon1">
         </div>
     </div>
-    <div class="col-md-12 mx-4">
-        <div class="table-responsive">
+    <div class="col-md-10 mx-4">
+        <div >
             <table class="table" style="max-width: 100%;">
                 <thead>
                   <tr>
@@ -20,11 +24,11 @@
                     <th scope="col">Trabajo</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style="font-size: 12px;">
                     <tr *ngFor="let dato of datos">
                         <th>{{dato.id}}</th>
                         <td>{{ dato.name }}</td>
-                        <td>{{ dato.note }}</td>
+                        <td><p>{{ dato.note }}</p></td>
                         <td>{{ dato.birthday }}</td>
                         <td>{{ dato.page }}</td>
                         <td>{{ dato.work }}</td>
@@ -33,5 +37,12 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="col-md-4 text-center">
+        <button class="btn btn-secondary" (click)="anterior()" [disabled]="page === 1">Anterior</button>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <button class="btn btn-secondary" (click)="siguiente()" [disabled]="page === total">Siguiente</button>
     </div>
 </div>

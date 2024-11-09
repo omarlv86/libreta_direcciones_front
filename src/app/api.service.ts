@@ -12,14 +12,21 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // Método para realizar una solicitud GET
-  getDatos(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/contacts`);
+  getDatos(page: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/contacts?page=${page}`);
   }
 
   // Método para realizar una solicitud POST
   postDatos(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/contacts`, data);
   }
+
+  getDataFilter(filter: any): any {
+    console.log(filter)
+    return ;
+    //return this.http.get<any>(`${this.apiUrl}/contacts?filter=`);
+  }
+  
 
   // Puedes agregar más métodos para PUT, DELETE, etc.
 }
