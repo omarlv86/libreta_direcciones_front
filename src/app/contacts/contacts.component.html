@@ -8,20 +8,30 @@
         </div>
     </div>
     <div class="col-md-12 mx-4">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Nota</th>
-                <th scope="col">cumpleaños</th>
-                <th scope="col">pagina web</th>
-                <th scope="col">Trabajo</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-            </tbody>
-          </table>
+        <div class="table-responsive">
+            <table class="table" style="max-width: 100%;">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">cumpleaños</th>
+                    <th scope="col">pagina web</th>
+                    <th scope="col">Trabajo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of datos">
+                        <th>{{dato.id}}</th>
+                        <td>{{ dato.name }}</td>
+                        <td>{{ dato.note }}</td>
+                        <td>{{ dato.birthday }}</td>
+                        <td>{{ dato.page }}</td>
+                        <td>{{ dato.work }}</td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
