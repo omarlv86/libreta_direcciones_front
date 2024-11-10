@@ -26,6 +26,11 @@ export class ApiService {
     return ;
     //return this.http.get<any>(`${this.apiUrl}/contacts?filter=`);
   }
+
+  // Método para realizar una solicitud POST
+  getDataById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/contacts/${id}`);
+  }
   
 
   // Puedes agregar más métodos para PUT, DELETE, etc.

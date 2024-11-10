@@ -1,28 +1,76 @@
 <div class="row mx-4">
-    <div class="col-md-12">
+    <div class="col-md-12 my-4">
         <h3 class="text-center">Datos de contacto</h3>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center my-4">
         <div class="col-md-6">
             <div class="col-md-12">
                 <label for="">Nombre:</label>
-                <label for="" class="form-control"></label>
+                <label for="" class="form-control">{{contact.name}}</label>
             </div>
             <div class="col-md-12">
                 <label for="">Notas:</label>
-                <label for="" class="form-control"></label>
+                <label for="" class="form-control">{{contact.note == '' ? 'Sin notas' : contact.note}}</label>
             </div>
             <div class="col-md-12">
                 <label for="">Cumpleaños:</label>
-                <label for="" class="form-control"></label>
+                <label for="" class="form-control">{{contact.birthday}}</label>
             </div>
             <div class="col-md-12">
                 <label for="">Pagina web:</label>
-                <label for="" class="form-control"></label>
+                <label for="" class="form-control">{{contact.web == null ? 'Sin pagina web' : contact.web}}</label>
             </div>
             <div class="col-md-12">
                 <label for="">Empresa de trabajo:</label>
-                <label for="" class="form-control"></label>
+                <label for="" class="form-control">{{contact.work == null ? 'No tiene trabajo' : contact.work}}</label>
+            </div>
+            <div class="row">
+                <div class="col-md-12" >
+                    <label for="" style="font-weight: bold; font-size: 16;" class="my-3">Telefonos:</label>
+                    <div *ngIf="contact.phone.length > 0; else elseBlock"></div>
+                    <div *ngFor="let phone of contact.phone; let p = index">
+                        <label for="">Telefono {{p+1}}:</label>
+                        <label for=""class="form-control my-1">{{ phone.phone }}</label>
+                    </div>
+                    <ng-template #elseBlock>
+                        <label for="" class="form-control">No hay telefonos guardados</label>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" >
+                    <label for="" style="font-weight: bold; font-size: 16;" class="my-3">Direcciones:</label>
+                    <div *ngIf="contact.address.length > 0; else elseBlock">
+                        <div *ngFor="let address of contact.address; let a = index">
+                            <p for="">Direccion {{a+1}}:</p>
+                            <label for="">Calle:</label>
+                            <label for=""class="form-control my-1">{{ address.street }}</label>
+                            <label for="">Ciudad:</label>
+                            <label for=""class="form-control my-1">{{ address.city }}</label>
+                            <label for="">Estado:</label>
+                            <label for=""class="form-control my-1">{{ address.state }}</label>
+                            <label for="">Pais:</label>
+                            <label for=""class="form-control my-1">{{ address.country }}</label>
+                        </div>
+                    </div>
+                    <ng-template #elseBlock>
+                        <label for="" class="form-control">No hay direcciones guardadas</label>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" >
+                    <label for="" style="font-weight: bold; font-size: 16;" class="my-3">Correos:</label>
+                    <div *ngIf="contact.mail.length > 0; else elseBlock">
+                        <div *ngFor="let mail of contact.mail; let m = index">
+                            <label for="">Correo electronico {{m+1}}:</label>
+                            <label for=""class="form-control my-1">{{ mail.email }}</label>
+                        </div>
+                    </div>
+                    <ng-template #elseBlock>
+                        <label for="" class="form-control">No hay direcciones de correo electronico</label>
+                    </ng-template>
+                </div>
             </div>
         </div>
     </div>
