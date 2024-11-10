@@ -22,6 +22,7 @@
                     <th scope="col">cumpleaños</th>
                     <th scope="col">pagina web</th>
                     <th scope="col">Trabajo</th>
+                    <th scope="col">opciones</th>
                   </tr>
                 </thead>
                 <tbody style="font-size: 12px;">
@@ -32,6 +33,9 @@
                         <td>{{ dato.birthday }}</td>
                         <td>{{ dato.page }}</td>
                         <td>{{ dato.work }}</td>
+                        <td>
+                            <button (click)="viewDetail(dato.id)">Ver</button>
+                        </td>
                     </tr>
                   
                 </tbody>

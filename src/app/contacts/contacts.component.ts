@@ -3,12 +3,13 @@ import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.css'
 })
@@ -17,7 +18,7 @@ export class ContactsComponent {
   page = 1;
   total = 0;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
   inputControl = new FormControl('');
   
 
@@ -72,15 +73,9 @@ export class ContactsComponent {
   }
 
   
-  onSearch(event: any) {
-    
-    if(event.target.value.length > 2){
-      console.log(event.target.value)
-    }
-    /* this.searchQuery = query.toLowerCase();
-    this.filteredItems = this.items.filter(item => 
-      item.toLowerCase().includes(this.searchQuery)
-    ); */
+  viewDetail(id: number) {
+    this.router.navigate(['/contacts/', id]); 
   }
+
 
 }
