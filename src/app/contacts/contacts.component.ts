@@ -23,15 +23,7 @@ export class ContactsComponent {
   
 
   ngOnInit(): void {
-    this.apiService.getDatos(this.page).subscribe(
-      (response: any) => {
-        this.datos = response.data;
-        this.total = response.total / 50;
-      },
-      (error: any) => {
-        console.error('Error al realizar la solicitud:', error);
-      }
-    );
+    this.getDataContact();
     this.inputControl.valueChanges.pipe(
       debounceTime(500)
     ).subscribe(value => {
@@ -41,10 +33,21 @@ export class ContactsComponent {
     });
   }
 
+  getDataContact():void{
+    this.apiService.getDatos(this.page).subscribe(
+      (response: any) => {
+        this.datos = response.data;
+        this.total = response.total / 50;
+      },
+      (error: any) => {
+        console.error('Error al realizar la solicitud:', error);
+      }
+    );
+  }
+
   
   anterior():void{
     this.page--;
-    console.log(this.page)
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
         this.datos = response.data;
@@ -59,7 +62,6 @@ export class ContactsComponent {
 
   siguiente():void{
     this.page++;
-    console.log(this.page)
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
         this.datos = response.data;
@@ -75,6 +77,17 @@ export class ContactsComponent {
   
   viewDetail(id: number) {
     this.router.navigate(['/contacts/', id]); 
+  }
+
+  deleteContact(id: number) {
+    this.apiService.deleteContact(id).subscribe(
+      (response: any) => {
+        this.getDataContact();
+      },
+      (error: any) => {
+        console.error('Error al realizar la solicitud:', error);
+      }
+    );
   }
 
 

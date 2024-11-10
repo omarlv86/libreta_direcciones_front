@@ -34,7 +34,8 @@
                         <td>{{ dato.page }}</td>
                         <td>{{ dato.work }}</td>
                         <td>
-                            <button (click)="viewDetail(dato.id)">Ver</button>
+                            <button class="btn" (click)="viewDetail(dato.id)">Ver</button>
+                            <button class="btn btn-danger" (click)="deleteContact(dato.id)">Eliminar</button>
                         </td>
                     </tr>
                   

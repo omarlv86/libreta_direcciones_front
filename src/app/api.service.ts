@@ -31,6 +31,10 @@ export class ApiService {
   getDataById(id: any): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/contacts/${id}`);
   }
+
+  deleteContact(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/contacts/${id}`);
+  }
   
 
   // Puedes agregar más métodos para PUT, DELETE, etc.
