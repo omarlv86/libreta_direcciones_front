@@ -1,79 +1,87 @@
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-center">{{title}} contacto</h3>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-4 mx-3">
+        <div class="col-md-12">
+            <label for="name">Nombre completo: </label>
+            <input class="form-control" id="name" type="text" formControlName="name">
+        </div>
+        <div class="col-md-12">
+            <label for="note">Notas: </label>
+            <input class="form-control" id="note" type="text" formControlName="note">
+        </div>
+        <div class="col-md-12">
+            <label for="birthday">Cumpleaños: </label>
+            <input class="form-control" id="birthday" type="date" formControlName="birthday">
+        </div>
+        <div class="col-md-12">
+            <label for="web">Pagina web: </label>
+            <input class="form-control" id="web" type="text" formControlName="web">
+        </div>
+        <div class="col-md-12">
+            <label for="work">Empresa de trabajo: </label>
+            <input class="form-control" id="work" type="text" formControlName="work">
+        </div>
+        <div class="col-md-12">
+            <h3>Direcciones</h3>
+            <button type="button" (click)="addAddress()">Agregar direccion</button>
+        </div>
+        <div class="col-md-12">
+            <div formArrayName="addresses">
+                <div *ngFor="let address of addresses.controls; let a = index" [formGroupName]="a">
+                    <div class="col-md-12">
+                        <label for="street-{{ a }}">Calle: </label>
+                        <input id="street-{{ a }}" class="form-control" type="text" formControlName="street">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="city-{{ a }}">Ciudad: </label>
+                        <input id="city-{{ a }}" class="form-control"type="text" formControlName="city">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="state-{{ a }}">Estado: </label>
+                        <input id="state-{{ a }}" class="form-control"type="text" formControlName="state">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="country-{{ a }}">Pais: </label>
+                        <input id="country-{{ a }}" class="form-control" type="text" formControlName="state">
+                    </div>
+                    
+                </div>  
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h3>Telefonos</h3>
+            <button type="button" (click)="addPhone()">Agregar Telefono</button>
+        </div>
+        <div class="col-md-12">
+            <div formArrayName="cellphones">
+                <div *ngFor="let cellphone of cellphones.controls; let c = index" [formGroupName]="c">
+                    <div class="col-md-12">
+                        <label for="cellphone-{{ c }}">Telefono: </label>
+                        <input id="cellphone-{{ c }}" class="form-control" type="text" formControlName="phone">
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h3>Correo electronico</h3>
+            <button type="button" (click)="addMail()">Agregar correo electronico</button>
+        </div>
+        <div class="col-md-12">
+            <div formArrayName="mails">
+                <div *ngFor="let mail of mails.controls; let m = index" [formGroupName]="m">
+                    <div class="col-md-12">
+                        <label for="email-{{ m }}">Correo electronico: </label>
+                        <input id="email-{{ m }}" class="form-control" type="text" formControlName="email">
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
-    <form [formGroup]="contactForm" class="my-4">
-        <div class="col-md-4 mx-3">
-            <div class="col-md-12">
-                <label for="name">Nombre completo: </label>
-                <input class="form-control" id="name" type="text" formControlName="name">
-            </div>
-            <div class="col-md-12">
-                <label for="note">Notas: </label>
-                <input class="form-control" id="note" type="text" formControlName="note">
-            </div>
-            <div class="col-md-12">
-                <label for="birthday">Cumpleaños: </label>
-                <input class="form-control" id="birthday" type="date" formControlName="birthday">
-            </div>
-            <div class="col-md-12">
-                <label for="web">Pagina web: </label>
-                <input class="form-control" id="web" type="text" formControlName="web">
-            </div>
-            <div class="col-md-12">
-                <label for="work">Empresa de trabajo: </label>
-                <input class="form-control" id="work" type="text" formControlName="work">
-            </div>
-        </div>
-        <div class="col-md-4 mx-3">
-            <h4>Direcciones</h4>
-            <button (click)="addAddress()">Agregar dirección</button>
-        </div>
-        <div class="col-md-4 mx-3">
-            <div *ngFor="let address of addresses; let i = index">
-                <div class="col-md-12">
-                    <label>Calle: </label>
-                    <input class="form-control"type="text" [(ngModel)]="address.street">
-                </div>
-                <div class="col-md-12">
-                    <label>Ciudad: </label>
-                    <input class="form-control"type="text" [(ngModel)]="address.city">
-                </div>
-                <div class="col-md-12">
-                    <label>Estado: </label>
-                    <input class="form-control"type="text" [(ngModel)]="address.state">
-                </div>
-                <div class="col-md-12">
-                    <label>Pais: </label>
-                    <input class="form-control"type="text" [(ngModel)]="address.country">
-                </div>
-              </div>          
-        </div>
-        <div class="col-md-4 mx-3">
-            <h4>Telefonos</h4>
-            <button (click)="addCellphone()">Agregar telefono</button>
-        </div>
-        <div class="col-md-4 mx-3">
-            <div *ngFor="let phone of cellphones; let i = index">
-                <div class="col-md-12">
-                    <label>{{i+1}} - Numero de telefono: </label>
-                    <input class="form-control"type="text" [(ngModel)]="phone.phone">
-                </div>
-              </div>          
-        </div>
-        <div class="col-md-4 mx-3">
-            <h4>Correos</h4>
-            <button (click)="addMail()">Agregar correo electronico</button>
-        </div>
-        <div class="col-md-4 mx-3">
-            <div *ngFor="let mail of mails; let i = index">
-                <div class="col-md-12">
-                    <label>{{i+1}} - correo electronico: </label>
-                    <input class="form-control"type="text" [(ngModel)]="mail.email">
-                </div>
-              </div>          
-        </div>
-    </form>
-
     
-</div>
+    
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+  </form>
+  <hr>
+  <p>Form Value: {{ profileForm.value | json }}</p>
+  <p>Form Status: {{ profileForm.status }}</p>
+<!--   <button type="button" (click)="updateProfile()">Update Profile</button> -->
