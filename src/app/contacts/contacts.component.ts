@@ -17,6 +17,7 @@ export class ContactsComponent {
   datos: any;
   page = 1;
   total = 0;
+  pagination = 50;
 
   constructor(private apiService: ApiService, private router: Router) {}
   inputControl = new FormControl('');
@@ -33,11 +34,19 @@ export class ContactsComponent {
     });
   }
 
+  /**
+  * Get data Contact and total pages
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param 
+  * @return 
+  */
   getDataContact():void{
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
         this.datos = response.data;
-        this.total = response.total / 50;
+        this.total = response.total / this.pagination;
       },
       (error: any) => {
         console.error('Error al realizar la solicitud:', error);
@@ -45,8 +54,15 @@ export class ContactsComponent {
     );
   }
 
-  
-  anterior():void{
+  /**
+  * before page in table
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param 
+  * @return 
+  */
+  before():void{
     this.page--;
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
@@ -60,7 +76,15 @@ export class ContactsComponent {
     );
   }
 
-  siguiente():void{
+  /**
+  * next page in table
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param 
+  * @return 
+  */
+  next():void{
     this.page++;
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
@@ -75,10 +99,26 @@ export class ContactsComponent {
   }
 
   
-  viewDetail(id: number) {
+  /**
+  * Go to view contact detail
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param id 
+  * @return 
+  */
+  viewContactDetail(id: number) {
     this.router.navigate(['/contacts/', id]); 
   }
 
+  /**
+  * Delete Contact
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param id 
+  * @return 
+  */
   deleteContact(id: number) {
     this.apiService.deleteContact(id).subscribe(
       (response: any) => {

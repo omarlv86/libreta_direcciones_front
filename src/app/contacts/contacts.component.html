@@ -34,7 +34,7 @@
                         <td>{{ dato.page }}</td>
                         <td>{{ dato.work }}</td>
                         <td>
-                            <button class="btn" (click)="viewDetail(dato.id)">Ver</button>
+                            <button class="btn" (click)="viewContactDetail(dato.id)">Ver</button>
                             <button class="btn btn-danger" (click)="deleteContact(dato.id)">Eliminar</button>
                         </td>
                     </tr>
@@ -44,10 +44,10 @@
         </div>
     </div>
     <div class="col-md-4 text-center">
-        <button class="btn btn-secondary" (click)="anterior()" [disabled]="page === 1">Anterior</button>
+        <button class="btn btn-secondary" (click)="before()" [disabled]="page === 1">Anterior</button>
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4 text-center">
-        <button class="btn btn-secondary" (click)="siguiente()" [disabled]="page === total">Siguiente</button>
+        <button class="btn btn-secondary" (click)="next()" [disabled]="page === total">Siguiente</button>
     </div>
 </div>
