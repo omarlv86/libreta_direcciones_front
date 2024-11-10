@@ -108,7 +108,7 @@ export class ContactsComponent {
   * @return 
   */
   viewContactDetail(id: number) {
-    this.router.navigate(['/contacts/', id]); 
+    this.router.navigate(['/contacts/show', id]); 
   }
 
   /**
@@ -128,6 +128,49 @@ export class ContactsComponent {
         console.error('Error al realizar la solicitud:', error);
       }
     );
+  }
+
+  /**
+  * Delete Contact
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param id 
+  * @return 
+  */
+  createContact() {
+    console.log('crear contacto');
+    this.router.navigate(['/contacts/create']); 
+    
+    /* this.apiService.deleteContact(id).subscribe(
+      (response: any) => {
+        this.getDataContact();
+      },
+      (error: any) => {
+        console.error('Error al realizar la solicitud:', error);
+      }
+    ); */
+  }
+
+  /**
+  * Delete Contact
+  *
+  * @author ricardo omar lugo vargas <omarl.vargass@hotmail.com>
+  * @created 2024-11-09
+  * @param id 
+  * @return 
+  */
+  updateContact(id:number) {
+    console.log('actualizar contacto', id)
+    this.router.navigate(['/contacts/update', id]); 
+    /* this.apiService.deleteContact(id).subscribe(
+      (response: any) => {
+        this.getDataContact();
+      },
+      (error: any) => {
+        console.error('Error al realizar la solicitud:', error);
+      }
+    ); */
   }
 
 
