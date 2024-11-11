@@ -4,8 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Índice
 
-- [Características](#ApiService, ApiRest, Components, Router)
-- [Tecnologías Utilizadas](#Angular18, )
+- [Características]
+    ApiService, ApiRest, Components, Router
+- [Tecnologías Utilizadas]
+    Angular18 
 
 ## Instalacion
 Clona el respositorio:
