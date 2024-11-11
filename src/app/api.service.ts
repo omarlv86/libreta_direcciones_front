@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://libreta_direcciones_backend.test/api'; // Reemplaza con la URL de tu API
+  private apiUrl = 'http://libreta_direcciones_backend.test/api';
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +22,7 @@ export class ApiService {
   }
 
   getDataFilter(filter: any): any {
-    console.log(filter)
-    return ;
-    //return this.http.get<any>(`${this.apiUrl}/contacts?filter=`);
+    return this.http.post<any>(`${this.apiUrl}/contacts/filter`, {filter});
   }
 
   getDataById(id: any): Observable<any> {
@@ -39,6 +37,4 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/contacts`, data);
   }
   
-
-  // Puedes agregar más métodos para PUT, DELETE, etc.
 }

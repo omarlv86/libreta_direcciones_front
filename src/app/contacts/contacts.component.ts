@@ -18,6 +18,7 @@ export class ContactsComponent {
   page = 1;
   total = 0;
   pagination = 50;
+  txtFilter = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
   inputControl = new FormControl('');
@@ -26,10 +27,21 @@ export class ContactsComponent {
   ngOnInit(): void {
     this.getDataContact();
     this.inputControl.valueChanges.pipe(
-      debounceTime(500)
+      debounceTime(800)
     ).subscribe(value => {
       if (value !== null && value !== undefined) {
-        this.apiService.getDataFilter(value)
+        this.txtFilter = value;
+        this.apiService.getDataFilter(value).subscribe(
+          (response: any) => {
+            this.datos = response.data;
+            this.total = response.total / this.pagination;
+          },
+          (error: any) => {
+            console.error('Error al realizar la solicitud:', error);
+          }
+        );
+      }else{
+        this.getDataContact();
       }
     });
   }
