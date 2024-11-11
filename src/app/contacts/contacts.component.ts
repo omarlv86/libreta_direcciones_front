@@ -15,6 +15,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ContactsComponent {
   datos: any;
+  datosClon:any;
   page = 1;
   total = 0;
   pagination = 50;
@@ -29,8 +30,8 @@ export class ContactsComponent {
     this.inputControl.valueChanges.pipe(
       debounceTime(800)
     ).subscribe(value => {
-      if (value !== null && value !== undefined) {
-        this.txtFilter = value;
+      console.log(value)
+      if (value != "") {
         this.apiService.getDataFilter(value).subscribe(
           (response: any) => {
             this.datos = response.data;
@@ -41,7 +42,8 @@ export class ContactsComponent {
           }
         );
       }else{
-        this.getDataContact();
+        this.datos = this.datosClon;
+        //this.getDataContact();
       }
     });
   }
@@ -58,6 +60,7 @@ export class ContactsComponent {
     this.apiService.getDatos(this.page).subscribe(
       (response: any) => {
         this.datos = response.data;
+        this.datosClon = response.data;
         this.total = response.total / this.pagination;
       },
       (error: any) => {
