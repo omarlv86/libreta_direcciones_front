@@ -35,7 +35,7 @@ export class ApiService {
     return this.http.delete<any>(`${this.apiUrl}/contacts/${id}`);
   }
 
-  createContact(data:any): Observable<any> {
+  createContact(data:any, id?:any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/contacts`, data);
   }
   

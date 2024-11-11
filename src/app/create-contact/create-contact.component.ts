@@ -16,21 +16,11 @@ import { ApiService } from '../api.service';
 export class CreateContactComponent {
 
   formBuilder = inject(FormBuilder);
-
-  /* profileForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    note: [''],
-    birthday: [''],
-    web: [''],
-    work: [''],
-    addresses: this.formBuilder.array([this.createAddress()]),
-    mails: this.formBuilder.array([this.createMail()]),
-    cellphones: this.formBuilder.array([this.createPhone()]),
-  }); */
   profileForm: FormGroup;
 
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) {
     this.profileForm = this.formBuilder.group({
+      id:[''],
       name: ['', Validators.required],
       note: [''],
       birthday: [''],
@@ -109,9 +99,8 @@ export class CreateContactComponent {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
-    this.apiService.createContact(this.profileForm.value).subscribe(
+    this.apiService.createContact(this.profileForm.value, this.id).subscribe(
       (response: any) => {
         console.log(response)
       },
@@ -126,6 +115,7 @@ export class CreateContactComponent {
       (response: any) => {
         console.log(response)
         this.profileForm.patchValue({
+          id: response.id,
           name: response.name,
           note: response.note,
           birthday: response.birthday,
@@ -136,25 +126,22 @@ export class CreateContactComponent {
         const addresses = this.profileForm.get('addresses') as FormArray;
         response.addresses.length > 0 ? this.removeAddress(0) : null
         response.addresses.forEach((address:any) => {
-          addresses.push(this.addAddressToArray(address)); // Asegúrate de crear un método que lo permita
+          addresses.push(this.addAddressToArray(address));
         });
 
         const mails = this.profileForm.get('mails') as FormArray;
         response.mails.length > 0 ? this.removeMail(0) : null
         response.mails.forEach((mail:any) => {
-          mails.push(this.addMailToArray(mail.email)); // Asegúrate de crear un método que lo permita
+          mails.push(this.addMailToArray(mail.id, mail.email));
         });
 
         const cellphones = this.profileForm.get('cellphones') as FormArray;
         response.phones.length > 0 ? this.removePhone(0) : null
         response.phones.forEach((phone: any) => {
-          console.log('phone', phone.phone)
-          cellphones.push(this.addPhoneToArray(phone.phone)); // Asegúrate de crear un método que lo permita
+          cellphones.push(this.addPhoneToArray(phone.id, phone.phone));
         }); 
 
-
-      console.warn('profileForm: ', this.profileForm.value);
-
+        console.log(this.profileForm.value)
       },
       (error: any) => {
         console.error('Error al realizar la solicitud:', error);
@@ -164,7 +151,7 @@ export class CreateContactComponent {
 
   addAddressToArray(address?: any): FormGroup {
     return this.formBuilder.group({
-      // Define tus campos de dirección aquí
+      id:[address.id || ''],
       street: [address?.street || ''],
       city: [address?.city || ''],
       state: [address?.state || ''],
@@ -173,14 +160,16 @@ export class CreateContactComponent {
     });
   }
 
-  addMailToArray(mail?: string): FormGroup {
+  addMailToArray(id?:number, mail?: string): FormGroup {
     return this.formBuilder.group({
+      id:[id||''],
       email: [mail || '']
     });
   }
 
-  addPhoneToArray(phone?: string): FormGroup {
+  addPhoneToArray(id?:number, phone?: string): FormGroup {
     return this.formBuilder.group({
+      id:[id||''],
       phone: [phone || '']
     });
   }
