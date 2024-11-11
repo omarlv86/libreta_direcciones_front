@@ -99,10 +99,11 @@ export class CreateContactComponent {
   }
 
   onSubmit() {
-    console.warn(this.profileForm.value);
     this.apiService.createContact(this.profileForm.value, this.id).subscribe(
       (response: any) => {
-        console.log(response)
+        if(response.status == 200){
+          alert('Solicitud exitosa')
+        }
       },
       (error: any) => {
         console.error('Error al realizar la solicitud:', error);
